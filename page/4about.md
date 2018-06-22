@@ -35,7 +35,7 @@ type: page
 
 **本站使用了[gaohaoyang](https://github.com/Gaohaoyang/gaohaoyang.github.io) 的jekyll 博客主题，自己做了点适配。**
 
-**如果想使用该主题，请访问: [https://github.com/skyc00p/blog](https://github.com/skyc00p/blog)**
+**如果想使用该主题，请访问: [https://github.com/SkyC00P/skyc00p.github.io](https://github.com/SkyC00P/skyc00p.github.io)**
 
 ~欢迎使用~
 
