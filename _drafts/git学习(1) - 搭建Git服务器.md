@@ -51,7 +51,6 @@ https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/README.md
 
 具体更多的配置参阅文档 [https://docs.gitlab.com/omnibus/README.html#installation-and-configuration-using-omnibus-package](https://docs.gitlab.com/omnibus/README.html#installation-and-configuration-using-omnibus-package)
 
-<<<<<<< HEAD
 最终进入的页面
 
 ![](https://i.imgur.com/AUc6qQQ.png)
