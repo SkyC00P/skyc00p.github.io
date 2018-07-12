@@ -43,8 +43,8 @@ git config --global user.email skycoop@163.com
 
 ````
 # 命令快捷方式设置
-git config --global alias.st status
-git config --global alias.ct "commit -m"
+git config --global alias.st "status -s -b"
+git config --global alias.ci "commit -m"
 git config --global alias.br branch
 git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 # 开启git输出着色
