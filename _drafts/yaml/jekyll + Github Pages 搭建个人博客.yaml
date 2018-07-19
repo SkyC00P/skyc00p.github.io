@@ -1,11 +1,20 @@
----
+﻿---
+
 layout: post
+
 date:   2018-06-25
+
 title:  "jekyll + Github Pages 搭建个人博客"
-categories: jekyll
-tags: jekyll Github git blog
+
+categories: 开发者日志
+tags: jekyll Github git 博客
+
 author: skycoop
+
 ---
 
+
+
 * content
+
 {:toc}

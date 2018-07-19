@@ -1,3 +1,23 @@
+﻿---
+
+layout: post
+
+date:   2018-06-25
+
+title:  "jekyll + Github Pages 搭建个人博客"
+
+categories: 开发者日志
+tags: jekyll Github git 博客
+
+author: skycoop
+
+---
+
+
+
+* content
+
+{:toc}
 ---
 layout: post
 title:  "jekyll + Github Pages 搭建个人博客"
@@ -11,7 +31,8 @@ author: skycoop
 
 一直有个想法想要搭个博客，尝试自己建站，但是太复杂了，不想花费太多的精力，但又不想用简书，CSDN这些网站来管理，限制太多。机缘巧合之下得知**GitHub** 提供了 Github Pages 服务，可以用来建立轻量级个人博客，可定制，免费，可以与git协同，实现备份与同步功能，300MB的免费空间，可使用Markdown编辑发布。最主要的是可以将所有的精力集中在编写博客身上，只需将写好的文章推送到远程仓库就行。于是花了几天时间研究了下，这篇文章就是这几天的总结经验。
 
-<!--more-->
+
+
 
 ## 搭建总纲 ##
 

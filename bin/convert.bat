@@ -1,9 +1,9 @@
 @echo off
-@chcp 65001
+@chcp 65001 >nul
+echo run %CMDCMDLINE%
 rem --------------------------------------------------------
 rem -- Function : 辅助Jekyll发布文章所用，保留源文件markdown文件，生成或同步指定的YAML标签头，合并YAML标签头和源文件生成带时间戳的markdown文件，并支持打开生成的YAML标签头和生成目录以及最终的markdown文件
 rem --------------------------------------------------------
-
 if "%~1"=="" (
     set /p msg=参数为空，任意键退出
     exit;
@@ -27,7 +27,7 @@ set "_CMD="
 :: -> 是否开启调试模式
 set "_DEBUG=n"
 :: -> 头文件是否存在时间属性且符合标准的时间格式
-set "_HasDate=Nodefind"
+set "_HasDate=N"
 :: ----------------------------------------------
 
 :: 初始化参数
@@ -42,6 +42,9 @@ if /i [%_CMD%] == [M] call :update
 
 %_exit%
 
+::--------------------------------------------------------
+::-- Function : 
+::--------------------------------------------------------
 :: 创建一个默认的YAML标签头
 :: 打开并编辑YAML标签头
 :: 合并
@@ -60,6 +63,9 @@ rem 异常情况，不可能到这里
 pause
 goto:eof
 
+::--------------------------------------------------------
+::-- Function : 
+::--------------------------------------------------------
 rem 已确定头文件存在，从头文件里获取日期
 rem 如果不存在日期，代表执行 [call :add] 时异常退出或者不符合规范，回显文件内容，询问是否删除，然后退出脚本
 rem 如果存在日期，代表旧文件可能存在，删掉旧文件, 回显头文件内容，询问是否打开头文件进行修改，无论如何都进行合并操作
@@ -98,11 +104,16 @@ echo.
 set /p _ANS="是否修改头文件，确认请按 [Y/y]，任意键继续..."
 echo.
 
-IF "%_ANS%" == "Y" "%_YAML_FILE%" & call :combine
-IF "%_ANS%" == "y" "%_YAML_FILE%" & call :combine
+IF "%_ANS%" == "Y" "%_YAML_FILE%"
+IF "%_ANS%" == "y" "%_YAML_FILE%"
+
+call :combine
 
 goto:eof
 
+::--------------------------------------------------------
+::-- Function : 
+::--------------------------------------------------------
 :openDir
 echo.
 choice /t 3 /d n /m "打开[_post]目录"
@@ -110,6 +121,9 @@ if %errorlevel%==1 (start %_DEST_PATH%) else ( echo openDir unknown cmd %_toNul%
 echo openDir done.%_toNul%
 goto:eof
 
+::--------------------------------------------------------
+::-- Function : 
+::--------------------------------------------------------
 :openFile
 if not exist "%_DEST_PATH%%_DATA%-%_FILE_NAME%.md" ( 
 	echo openFile file don't exist
@@ -213,7 +227,7 @@ rem call :checkDate "asdas123123"
 rem pause
 rem call :checkDate "1235-41-51 11-15-1"
 rem pause
-rem echo done checkDate [new _DATA is %_DATA%, new _HasDate is %_HasDate%] %toNul%
+rem echo done checkDate [new _DATA is %_DATA%, new _HasDate is %_HasDate%] %_toNul%
 %_exit%
 
 ::--------------------------------------------------------
@@ -238,6 +252,9 @@ echo:>> "%_YAML_FILE%"
 %_DEBUG%if exist "%_YAML_FILE%" echo. & type "%_YAML_FILE%"
 goto:eof
 
+::--------------------------------------------------------
+::-- Function : 
+::--------------------------------------------------------
 :queryDate
 for /f "usebackq skip=1 tokens=1,* delims=: " %%a in ("%_YAML_FILE%") do (
     if "date" == "%%a" call :checkDate "%%b"
@@ -250,24 +267,24 @@ rem 日期格式不符合规格，则置空 _DATA 以及设置 _HasDate 为 N
 ::--------------------------------------------------------
 :checkDate
 set "d=%*"
-echo d1 is "%d%" %toNul%
+echo d1 is "%d%" %_toNul%
 
 set "d=%d: =%"
-echo d2 is "%d%" %toNul%
+echo d2 is "%d%" %_toNul%
 
 set "d=%d:"=%"
-echo d3 is "%d%" %toNul%
+echo d3 is "%d%" %_toNul%
 
 if ["%d%"] == [""] (
 	set "_HasDate=N" & set "_DATA="
-	echo [new _DATA is nul, new _HasDate is N] %toNul%
+	echo [new _DATA is nul, new _HasDate is N] %_toNul%
 	set "d="
 	goto:eof
 )
 
 if ["%d%"] == [" ="] (
 	set "_HasDate=N" & set "_DATA="
-	echo [new _DATA is nul, new _HasDate is N] %toNul%
+	echo [new _DATA is nul, new _HasDate is N] %_toNul%
 	set "d="
 	goto:eof
 )
@@ -276,7 +293,7 @@ echo "%d%" | findstr /r /c:"^\"[1-9][0-9][0-9][0-9]\-[0-9][0-9]\-[0-9][0-9]\"" >
 for /f "tokens=*" %%i in (tmp.txt) do set "str=%%i"
 if exist tmp.txt del tmp.txt
 
-echo [the str is %str%] %toNul%
+echo [the str is %str%] %_toNul%
 if not ["%str%"] == [""] (
 	set "_DATA=%d%"
 	set "_HasDate=Y"
@@ -287,7 +304,7 @@ if not ["%str%"] == [""] (
 
 set "d="
 set "str="
-echo [new _DATA is %_DATA%, new _HasDate is %_HasDate%] %toNul%
+echo [new _DATA is %_DATA%, new _HasDate is %_HasDate%] %_toNul%
 goto:eof
 
 ::--------------------------------------------------------
@@ -324,9 +341,9 @@ if /i [%_DEBUG%] == [y] set "debug=" & set "toNul=" & set "breakpoint=pause" & s
 endlocal & (set _DEBUG=%debug% & set _toNul=%toNul% & set "_pause=%breakpoint%" & set "_exit=%exit%" & set "_echoY=%echoY%" & set "_echoN=%echoN%")
 
 :: 显示所有的全局变量
-%_DEBUG%echo:-----------------------------------------------
-%_DEBUG%set _
-%_DEBUG%echo:-----------------------------------------------
-%_DEBUG%echo:
+echo:-----------------------------------------------
+set _
+echo:-----------------------------------------------
+echo:
 
 goto:eof
